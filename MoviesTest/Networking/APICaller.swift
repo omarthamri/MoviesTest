@@ -9,8 +9,7 @@ import Foundation
 
 struct Constants {
     static let API_KEY = "c9856d0cb57c3f14bf75bdc6c063b8f3"
-    static let ListMoviesBaseURL = "https://api.themoviedb.org"
-    static let detailMovieBaseURL = "https://developers.themoviedb.org"
+    static let BaseURL = "https://api.themoviedb.org"
 }
 
 enum APIError: Error {
@@ -22,7 +21,7 @@ class APICaller {
     static let shared = APICaller()
     
     func getTrendingMovies(completion: @escaping (Result<[Movie],Error>) -> Void) {
-        guard let url = URL(string: "\(Constants.ListMoviesBaseURL)/3/discover/movie?api_key=\(Constants.API_KEY)") else {
+        guard let url = URL(string: "\(Constants.BaseURL)/3/discover/movie?api_key=\(Constants.API_KEY)") else {
             
             return
         }
@@ -41,7 +40,7 @@ class APICaller {
     }
     
     func getMoviesDetails(movieId: Int,completion: @escaping (Result<Movie,Error>) -> Void) {
-        guard let url = URL(string: "\(Constants.ListMoviesBaseURL)/3/movie/\(movieId)?api_key=\(Constants.API_KEY)") else {
+        guard let url = URL(string: "\(Constants.BaseURL)/3/movie/\(movieId)?api_key=\(Constants.API_KEY)") else {
             return
         }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
